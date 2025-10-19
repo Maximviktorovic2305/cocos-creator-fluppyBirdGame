@@ -1,0 +1,37 @@
+import { _decorator, Component, Label, Node } from 'cc'
+const { ccclass, property } = _decorator
+
+@ccclass('Results')
+export class Results extends Component {
+	@property(Label) public scoreLabel: Label
+	@property(Label) public highScore: Label
+	@property(Label) public resultEnd: Label
+
+	maxScore: number = 0
+	currentScore: number
+
+	updateScore(num: number) {
+		this.currentScore = num
+		this.scoreLabel.string = '' + this.currentScore
+	}
+
+	resetScore() {
+		this.updateScore(0)
+		this.hideResults()
+	}
+
+	addScore() {
+		this.updateScore(this.currentScore + 1)
+	}
+
+	showResults() {
+		this.maxScore = Math.max(this.currentScore, this.maxScore)
+		this.highScore.string = 'High Score: ' + this.highScore
+		this.resultEnd.node.active = true
+	}
+
+	hideResults() {
+		this.resultEnd.node.active = false
+		this.highScore.node.active = false
+	}
+}

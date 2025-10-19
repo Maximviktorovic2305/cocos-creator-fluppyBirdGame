@@ -15,6 +15,7 @@ export class Ground extends Component {
 	@property(Node) public ground1: Node
 	@property(Node) public ground2: Node
 	@property(Node) public ground3: Node
+	@property({ type: GameControl }) public gameControl: GameControl
 
 	public groundWidth1: number
 	public groundWidth2: number
@@ -23,9 +24,6 @@ export class Ground extends Component {
 	public tempStartLocation1 = new Vec3()
 	public tempStartLocation2 = new Vec3()
 	public tempStartLocation3 = new Vec3()
-
-	public gameControlSpeed = new GameControl()
-	public gameSpeed: number
 
 	protected onLoad(): void {
 		this.startUp()
@@ -46,15 +44,15 @@ export class Ground extends Component {
 	}
 
 	update(deltaTime: number) {
-		this.gameSpeed = this.gameControlSpeed.speed
+		const currentSpeed = this.gameControl ? this.gameControl.speed : 300
 
 		this.tempStartLocation1 = this.ground1.position
 		this.tempStartLocation2 = this.ground2.position
 		this.tempStartLocation3 = this.ground3.position
 
-		this.tempStartLocation1.x -= this.gameSpeed * deltaTime
-		this.tempStartLocation2.x -= this.gameSpeed * deltaTime
-		this.tempStartLocation3.x -= this.gameSpeed * deltaTime
+		this.tempStartLocation1.x -= currentSpeed * deltaTime
+		this.tempStartLocation2.x -= currentSpeed * deltaTime
+		this.tempStartLocation3.x -= currentSpeed * deltaTime
 
 		const scene = director.getScene()
 		const canvas = scene.getComponentInChildren(Canvas)

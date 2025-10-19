@@ -1,5 +1,6 @@
-import { _decorator, CCInteger, Component, Node } from 'cc'
+import { _decorator, CCInteger, Component, EventKeyboard, Input, input, Node } from 'cc'
 import { Ground } from './Ground'
+import { Results } from './Results'
 const { ccclass, property } = _decorator
 
 @ccclass('GameControl')
@@ -8,15 +9,17 @@ export class GameControl extends Component {
 	@property({ type: CCInteger }) public speed: number = 300
 	@property({ type: CCInteger }) public pipeSpeed: number = 200
 
-    onLoad(): void {
-        
-    }         
+	@property({ type: Results }) public results: Results
 
-    initListener() {
+	onLoad() {}
 
+	initListener() {
+        input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this)
     }
 
-    startGame() {
+    onKeyDown(event: EventKeyboard) {
         
     }
+
+	startGame() {}
 }
