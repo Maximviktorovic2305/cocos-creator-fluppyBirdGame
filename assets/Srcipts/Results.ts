@@ -26,8 +26,9 @@ export class Results extends Component {
 
 	showResults() {
 		this.maxScore = Math.max(this.currentScore, this.maxScore)
-		this.highScore.string = 'High Score: ' + this.highScore
+		this.highScore.string = 'High Score: ' + this.maxScore
 		this.resultEnd.node.active = true
+		this.highScore.node.active = true
 	}
 
 	hideResults() {

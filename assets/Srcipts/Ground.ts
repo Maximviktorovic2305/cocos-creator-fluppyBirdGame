@@ -15,7 +15,7 @@ export class Ground extends Component {
 	@property(Node) public ground1: Node
 	@property(Node) public ground2: Node
 	@property(Node) public ground3: Node
-	@property({ type: GameControl }) public gameControl: GameControl
+	@property({ type: GameControl }) public gameControl: GameControl | null = null
 
 	public groundWidth1: number
 	public groundWidth2: number
