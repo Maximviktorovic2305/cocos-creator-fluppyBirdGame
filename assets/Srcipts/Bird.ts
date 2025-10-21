@@ -11,37 +11,33 @@ const { ccclass, property } = _decorator
 
 @ccclass('Bird')
 export class Bird extends Component {
-	@property(CCFloat) public jumpHeight: number = 3.5
-	@property(CCFloat) public jumpDuration: number = 3.5
+	@property(CCFloat) public jumpHeight: number = 100
+	@property(CCFloat) public jumpDuration: number = 0.5
 
 	public birdAnimation: Animation
 	public birdLocation: Vec3
+	public hitSomething: boolean
 
 	onLoad() {
 		this.resetBird()
 		this.birdAnimation = this.node.getComponent(Animation)
+
 	}
 
 	resetBird() {
 		this.birdLocation = new Vec3(0, 0, 0)
 		this.node.setPosition(this.birdLocation)
+		this.hitSomething = false
 	}
 
 	fly() {
 		this.birdAnimation.stop()
-		tween(this.node.position)
-			.to(
+		tween(this.node)
+			.by(
 				this.jumpDuration,
-				new Vec3(
-					this.node.position.x,
-					this.node.position.y + this.jumpHeight,
-					0,
-				),
+				{ position: new Vec3(0, this.jumpHeight, 0) },
 				{
-					easing: 'smooth',
-					onUpdate: (target: Vec3, ratio: number) => {
-						this.node.position = target
-					},
+					easing: 'smooth'
 				},
 			)
 			.start()

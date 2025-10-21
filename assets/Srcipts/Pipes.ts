@@ -8,6 +8,7 @@ import {
 	Vec3,
 } from 'cc'
 import { Utils } from './Utils'
+import { GameControl } from './GameControl'
 const { ccclass, property } = _decorator
 
 @ccclass('Pipes')
@@ -28,7 +29,7 @@ export class Pipes extends Component {
 	hasCreatedNewPipe: boolean // Flag to ensure only one new pipe is created
 
 	onLoad() {
-		this.game = find('GameControl').getComponent('GameControl')
+		this.game = find('GameControl').getComponent(GameControl)
 		this.pipeSpeed = this.game.pipeSpeed
 		this.initPosition()
 		this.isPass = false
